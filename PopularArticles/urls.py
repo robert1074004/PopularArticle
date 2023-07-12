@@ -19,6 +19,7 @@ from polls.views import ArticleView
 
 urlpatterns = [
     path("articles/<int:pk>", ArticleView.as_view()),
+    path("articles/", ArticleView.as_view()),
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls)
 ]
