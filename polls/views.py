@@ -15,4 +15,12 @@ class ArticleView(APIView):
             serializer.save()
             return Response(serializer.data, status = 201)
         return Response(serializer.errors, status = 400)
+
+    def put(self, request, pk):
+        article = Article.objects.get(pk = pk)
+        serializer = ArticleSerializer(article, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status = 400)
     
