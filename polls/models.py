@@ -10,3 +10,7 @@ class Article(models.Model):
     image = models.URLField()
     content = models.TextField(default = fake.paragraph)
     pub_date = models.DateTimeField(default=timezone.now)
+
+class User(models.Model):
+    account = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
