@@ -1,0 +1,10 @@
+[
+    {
+        "model": "polls.user",
+        "pk": 1,
+        "fields": {
+          "account": "PopularArticles",
+          "password": "{{ MyPassword }}"
+        }
+    }
+]
