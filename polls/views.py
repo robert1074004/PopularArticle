@@ -24,3 +24,7 @@ class ArticleView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status = 400)
     
+    def delete(self, request, pk):
+        article = Article.objects.get(pk=pk)
+        article.delete()
+        return Response(status = 204)
