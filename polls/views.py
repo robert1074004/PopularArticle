@@ -1,7 +1,27 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Article
+from .models import Article, User
 from .serializer import ArticleSerializer
+from django.contrib.auth.hashers import check_password
+from dotenv import load_dotenv
+from datetime import datetime, timedelta
+import jwt
+import os
+
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+class UserLoginView(APIView):
+    def post(self, request):
+        account = request.data.get('account')
+        password = request.data.get('password')
+        user = User.objects.get(account=account)
+        password_matched = check_password(password, user.password)
+        if not user or not password_matched:
+            return Response({'error': 'Invalid credentials'}, status=400)
+        payload = {'account': user.account, 'exp': (datetime.utcnow() + timedelta(days=7))}
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        return Response({'token': token})
 
 class ArticleView(APIView):
     def get(self, request, pk):
