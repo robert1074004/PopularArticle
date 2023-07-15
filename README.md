@@ -13,17 +13,30 @@
 3.創建並激活虛擬環境(可選)
 
     python -m venv env
+
+  適用於macOS和Linux
+
     source env/bin/activate
+
+  適用於windows
+
+    env\Scripts\activate
 
 4.下載所需要的套件
 
     pip install -r requirements.txt
 
-5.運行數據遷移
+5.配置環境變數
+
+    touch .env
+
+  請參考.env.example檔，設定環境變數
+
+6.運行數據遷移
 
     python manage.py migrate
     
-6.製作雜湊後的密碼
+7.製作雜湊後的密碼
 
   請先將password.py 中 your_password替換成你想設定的密碼
 
@@ -31,16 +44,12 @@
 
   複製顯示在終端機的密碼，等下新增種子資料要用
     
-7.新增種子資料
+8.新增種子資料
 
   請先將user_seed_data.json中的{{ MyPassword }}替換成剛才複製的密碼
   
     python manage.py loaddata user_seed_data.json
     python manage.py loaddata seed_data.json
-
-## 配置環境變數
-
-請參考.env.example
 
 ## 啟動專案
 啟動伺服器
