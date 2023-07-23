@@ -23,7 +23,7 @@ DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY2 = os.getenv("SECRET_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,22 +53,27 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_jwt",
-    'django_extensions'
+    "django_extensions",
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-#     ],
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ]
+}
 
-# JWT_AUTH = {
-#     'JWT_SECRET_KEY': SECRET_KEY,
-#     'JWT_ALGORITHM': 'HS256',
-#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
-#     'JWT_ALLOW_REFRESH': True,
-#     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30),
-# }
+
+JWT_AUTH = {
+    "JWT_SECRET_KEY": SECRET_KEY2,
+    "JWT_ALGORITHM": "HS256",
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=7),
+    "JWT_ALLOW_REFRESH": True,
+    "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=30),
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -97,6 +102,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = "PopularArticles.wsgi.application"
 
