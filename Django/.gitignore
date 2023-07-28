@@ -1,0 +1,7 @@
+*.pyc
+*.tmp
+staticfiles/
+pip/
+db.sqlite3
+.env
+env
