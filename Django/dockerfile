@@ -1,5 +1,5 @@
 #指定使用python的版本
-FROM python3.7.0
+FROM python:3.7
 
 # 將 PYTHONUNBUFFERED 設定為 1，可以確保 Python 直接將輸出寫入標準輸出流（stdout），這樣在 Docker 容器中運行 Django 時，你可以即時看到應用的輸出日誌和訊息，而不需要等到緩衝區填滿後才顯示。開發和調試 Django 應用時特別有用
 ENV PYTHONUNBUFFERED 1
