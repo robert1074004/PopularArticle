@@ -6,8 +6,11 @@ services:
     ports:
       - "8000:8000"
       # (host:container)
+    env_file:
+      - .env
+      #從.env檔中獲取連線資料庫的敏感資訊
     volumes:
-      - .:/PopularArticle
+      - ./PopularArticles:/PopularArticles
       # 將當前目錄與docker容器中的/PopularArticle同步, 當前目錄有文件更新時, /PopularArticle的文件也會更新(需重新docker-compose up)
     depends_on:
       - db

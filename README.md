@@ -9,52 +9,40 @@
 2.進入此專案
 
     cd PopularArticle
+    
 
-3.創建並激活虛擬環境(可選)
-
-    python -m venv env
-
-  適用於macOS和Linux
-
-    source env/bin/activate
-
-  適用於windows
-
-    env\Scripts\activate
-
-4.下載所需要的套件
-
-    pip install -r requirements.txt
-
-5.配置環境變數
+3.配置環境變數
 
     touch .env
 
   請參考.env.example檔，設定環境變數
 
-6.運行數據遷移
+4.配置使用者密碼
+
+  打開PopularArticles/polls/scripts/user_seed.py，將your_password改成你想要設定的密碼
+
+5.建置docker容器並運行
+
+    docker-compose build
+
+    docker-compose up
+
+6.開啟另一個cmd或powershell , 進入django的container
+
+    docker ps  #有兩個正在運行的service
+
+    docker exec -it <Container ID> bash  #選擇django的service進入
+
+7.運行數據遷移
 
     python manage.py migrate
-    
-7.製作雜湊後的密碼
-
-  請先將password.py 中 your_password替換成你想設定的密碼
-
-    python password.py
-
-  複製顯示在終端機的密碼，等下新增種子資料要用
-    
+       
 8.新增種子資料
 
-  請先將user_seed_data.json中的{{ MyPassword }}替換成剛才複製的密碼
-  
-    python manage.py loaddata user_seed_data.json
-    python manage.py loaddata seed_data.json
+    python manage.py runscript user_seed
+    python manage.py runscript article_seed
 
-## 啟動專案
-啟動伺服器
 
-    python manage.py runserver
 API 將運行在 http://localhost:8000/ 上
 
 ## API文件

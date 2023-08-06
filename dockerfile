@@ -5,10 +5,13 @@ FROM python:3.7
 ENV PYTHONUNBUFFERED 1
 
 # 創建並設置工作目錄
-WORKDIR /PopularArticle
+WORKDIR /PopularArticles
 
 # 將你的 Django 專案文件複製到容器中
-COPY . /PopularArticle/
+# COPY . /PopularArticles/
+
+#複製requirements.txt 到容器中
+COPY requirements.txt requirements.txt
 
 # 安裝依賴
 RUN pip install --no-cache-dir -r requirements.txt
@@ -16,6 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 公開 Django 應用所使用的端口（預設是 8000）
 EXPOSE 8000
+
 
 # 執行 Django 開發伺服器
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
